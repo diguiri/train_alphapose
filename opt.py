@@ -91,8 +91,8 @@ class opt:
   optMethod = 'rmsprop'
   nEpochs = 3
   epoch = 0
-  trainBatch = 1
-  validBatch = 1
+  trainBatch = 20
+  validBatch = 20
   trainIters = 3
   valIters = 0
   inputResH = 320
