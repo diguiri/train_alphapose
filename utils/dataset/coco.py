@@ -49,10 +49,16 @@ class Mscoco(data.Dataset):
             self.bndbox_coco_train = annot['bndbox'][:-5887]
             self.part_coco_train = annot['part'][:-5887]
             # val
-            self.imgname_coco_val = annot['imgname'][-5887:]
+            self.imgname_coco_val = []
+            for elt in annot['imgname'][:-5887] :
+                elt2 = reduce(lambda x, y: x + y,
+                map(lambda x: chr(int(x)), elt))
+                if os.path.isfile(os.path.join(self.img_folder, elt2)):
+                    self.imgname_coco_val.append(elt)
             self.bndbox_coco_val = annot['bndbox'][-5887:]
             self.part_coco_val = annot['part'][-5887:]
         self.imgname_coco_train = np.array(self.imgname_coco_train)
+        self.imgname_coco_val = np.array(self.imgname_coco_val)
         self.size_train = self.imgname_coco_train.shape[0]
         self.size_val = self.imgname_coco_val.shape[0]
 
